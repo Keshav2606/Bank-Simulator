@@ -1,14 +1,20 @@
 import mysql.connector
+from mysql.connector import Error
 import bcrypt
 from datetime import datetime
 
 def create_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="*****",
-        database="bankdb"
-    )
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root_user",
+            password="your_password",
+            database="bankdb"
+        )
+        return conn
+    except ConnectionRefusedError as e:
+        return e
+
 
 def create_tables():
     conn = create_connection()
@@ -48,7 +54,3 @@ def create_tables():
     
     conn.commit()
     conn.close()
-
-
-
-

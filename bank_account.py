@@ -80,6 +80,10 @@ class CurrentAccount(Account):
     def __init__(self, username):
         super().__init__(username, 'current')
 
+class SalaryAccount(Account):
+    def __init__(self, username):
+        super().__init__(username, 'salary')
+
 
 class Bank:
     @staticmethod

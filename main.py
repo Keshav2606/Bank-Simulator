@@ -23,11 +23,12 @@ def main():
                 while True:
                     print("1. Create Savings Account")
                     print("2. Create Current Account")
-                    print("3. Deposit")
-                    print("4. Withdraw")
-                    print("5. View Account Details")
-                    print("6. View Transaction History")
-                    print("7. Logout")
+                    print("3. Create Salary Account")
+                    print("4. Deposit")
+                    print("5. Withdraw")
+                    print("6. View Account Details")
+                    print("7. View Transaction History")
+                    print("8. Logout")
                     choice = input("Enter choice: ")
                     
                     if choice == '1':
@@ -37,23 +38,26 @@ def main():
                         account = CurrentAccount(user_id)
                         account.create_account()
                     elif choice == '3':
-                        account_id = input("Enter account ID: ")
-                        account_type = input("Enter account type: ").lower()
-                        amount = float(input("Enter amount: "))
-                        account = Account(user_id, account_type, account_id)
-                        account.deposit(amount)
+                        account = SalaryAccount(user_id)
+                        account.create_account()
                     elif choice == '4':
                         account_id = input("Enter account ID: ")
                         account_type = input("Enter account type: ").lower()
                         amount = float(input("Enter amount: "))
                         account = Account(user_id, account_type, account_id)
-                        account.withdraw(amount)
+                        account.deposit(amount)
                     elif choice == '5':
-                        Bank.get_account_details(user_id)
+                        account_id = input("Enter account ID: ")
+                        account_type = input("Enter account type: ").lower()
+                        amount = float(input("Enter amount: "))
+                        account = Account(user_id, account_type, account_id)
+                        account.withdraw(amount)
                     elif choice == '6':
+                        Bank.get_account_details(user_id)
+                    elif choice == '7':
                         account_id = input("Enter account ID: ")
                         Bank.get_transaction_history(account_id)
-                    elif choice == '7':
+                    elif choice == '8':
                         break
         elif choice == '3':
             break
