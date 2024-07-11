@@ -1,9 +1,10 @@
 from database import *
 
 class Account:
-    def __init__(self, username, account_type):
+    def __init__(self, username, account_type, account_id= None):
         self.username = username
         self.account_type = account_type
+        self.account_id = account_id
         self.balance = 0
     
     def create_account(self):
@@ -19,23 +20,23 @@ class Account:
 
     def deposit(self, amount):
         self.balance = self.get_balance() + amount
-        self.update_balance()
+        self.update_balance(self.account_id)
         self.record_transaction('deposit', amount)
     
     def withdraw(self, amount):
         if self.get_balance() >= amount:
             self.balance = self.get_balance() - amount
-            self.update_balance()
+            self.update_balance(self.account_id)
             self.record_transaction('withdrawal', amount)
         else:
             print('Insufficient funds.')
 
-    def update_balance(self):
+    def update_balance(self, account_id):
         conn = create_connection()
         cursor = conn.cursor()
 
         cursor.execute('UPDATE accounts SET balance = %s WHERE user_id = %s AND account_number = %s',
-                       (self.balance, self.username, self.get_account_id()))
+                       (self.balance, self.username, account_id))
         
         conn.commit()
         conn.close()

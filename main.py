@@ -38,13 +38,15 @@ def main():
                         account.create_account()
                     elif choice == '3':
                         account_id = input("Enter account ID: ")
+                        account_type = input("Enter account type: ").lower()
                         amount = float(input("Enter amount: "))
-                        account = Account(user_id, 'savings')
+                        account = Account(user_id, account_type, account_id)
                         account.deposit(amount)
                     elif choice == '4':
                         account_id = input("Enter account ID: ")
+                        account_type = input("Enter account type: ").lower()
                         amount = float(input("Enter amount: "))
-                        account = Account(user_id, 'savings')
+                        account = Account(user_id, account_type, account_id)
                         account.withdraw(amount)
                     elif choice == '5':
                         Bank.get_account_details(user_id)
